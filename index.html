@@ -31,19 +31,53 @@
 </head>
 <body>
 
-  <h2>🗣 Dictado por Voz + Corrección IA</h2>
-  <textarea id="campoDictado" placeholder="Habla aquí..."></textarea><br>
 
-  <button onclick="iniciarDictado('campoDictado')">🎤 Iniciar Dictado</button>
-  <button onclick="detenerDictado()">🛑 Detener</button>
-  <button onclick="corregirTexto()">🧠 Corregir Ortografía</button>
-  <button onclick="corregirConIA()">🤖 Corregir con IA</button>
-  <button onclick="deshacerCorreccion()">💾 Deshacer Corrección</button>
+  <!-- PANEL DE CONTRASEÑA -->
+  <div id="panelClave" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                              background: white; padding: 30px; box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+                              border-radius: 12px; text-align: center; z-index: 999;">
+    <h2>🔐 Ingreso</h2>
+    <p>Ingresa la contraseña para acceder:</p>
+    <input type="password" id="clave" placeholder="Contraseña..." style="padding: 10px; width: 80%; border-radius: 6px; border: 1px solid #aaa;">
+    <br><br>
+    <button onclick="verificarClave()" style="padding: 10px 20px;">Ingresar</button>
+    <p id="mensajeClave" style="color:red; margin-top:10px;"></p>
+  </div>
 
-  <p id="mensajeCarga" style="display: none; color: orange; font-weight: bold;">⏳ Corrigiendo con IA... Por favor espera.</p>
-  <div id="estado">Estado: <span id="estadoTexto">Inactivo</span></div>
+  <!-- CONTENIDO OCULTO AL INICIO -->
+  <div id="contenidoApp" style="display: none;">
+    <h2>🗣 Dictado por Voz + Corrección IA</h2>
+    <textarea id="campoDictado" placeholder="Habla aquí..."></textarea><br>
 
+    <button onclick="iniciarDictado('campoDictado')">🎤 Iniciar Dictado</button>
+    <button onclick="detenerDictado()">🛑 Detener</button>
+    <button onclick="corregirTexto()">🧠 Corregir Ortografía</button>
+    <button onclick="corregirConIA()">🤖 Corregir con IA</button>
+    <button onclick="deshacerCorreccion()">💾 Deshacer Corrección</button>
+
+    <p id="mensajeCarga" style="display: none; color: orange; font-weight: bold;">⏳ Corrigiendo con IA... Por favor espera.</p>
+    <div id="estado">Estado: <span id="estadoTexto">Inactivo</span></div>
+  </div>
+
+
+  
+
+  
   <script>
+
+
+ // FUNCIÓN DE VERIFICACIÓN DE CONTRASEÑA
+  function verificarClave() {
+    const clave = document.getElementById("clave").value;
+    const mensaje = document.getElementById("mensajeClave");
+
+    if (clave === "1234") {
+      document.getElementById("panelClave").style.display = "none";
+      document.getElementById("contenidoApp").style.display = "block";
+    } else {
+      mensaje.textContent = "❌ Contraseña incorrecta.";
+    }
+  }
     let recognition;
     let campoActivo = null;
     let textoFinal = '';
@@ -210,4 +244,6 @@ recognition.onresult = function(event) {
         
   </script>
 </body>
-</html>
+</html>   
+
+
