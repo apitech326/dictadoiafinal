@@ -65,6 +65,8 @@
     <button onclick="corregirTexto()">🧠 Corregir Ortografía</button>
     <button onclick="corregirConIA()">🤖 Corregir con IA</button>
     <button onclick="deshacerCorreccion()">💾 Deshacer Corrección</button>
+    <button onclick="aplicarComandos()">⚙️ Aplicar Comandos</button>
+
 
     <p id="mensajeCarga" style="display: none; color: orange; font-weight: bold;">⏳ Corrigiendo con IA... Por favor espera.</p>
     <div id="estado">Estado: <span id="estadoTexto">Inactivo</span></div>
@@ -182,6 +184,26 @@ recognition.onresult = function(event) {
       textarea.style.height = 'auto';
       textarea.style.height = (textarea.scrollHeight) + 'px';
     }
+
+
+
+
+function aplicarComandos() {
+  const campo = document.getElementById("campoDictado");
+  campo.value = campo.value
+    .replace(/siguiente línea/gi, '\n')
+    .replace(/nueva línea/gi, '\n')
+    .replace(/coma/gi, ',')
+    .replace(/punto/gi, '.')
+    .replace(/proporción/gi, ':')
+    .replace(/numeral/gi, '#')
+    .replace(/slash/gi, '/');
+}
+
+
+
+
+
 
     async function corregirTexto() {
       const campo = document.getElementById("campoDictado");
